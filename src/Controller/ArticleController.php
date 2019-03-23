@@ -7,6 +7,7 @@ use App\Repository\ArticleRepository;
 use App\Service\SlackClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,8 +27,14 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage(ArticleRepository $repository)
+    public function homepage(ArticleRepository $repository, Request $request)
     {
+        //User from the session
+        //dd(unserialize($request->getSession()->get('_security_main'))->getUser());
+
+        //PostAuthenticationGuardToken
+        //dd(unserialize($request->getSession()->get('_security_main')));
+
         $articles = $repository->findAllPublishedOrderedByNewest();
 
         return $this->render('article/homepage.html.twig', [
