@@ -19,6 +19,24 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function findOrderedByName()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.firstName', 'ASC');
+    }
+
+    /**
+     * @return User[]
+     */
+    public function findAllFirstNameAlphabetical()
+    {
+        return $this->createQueryBuilder('u')
+            ->orderBy('u.firstName', 'ASC')
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
