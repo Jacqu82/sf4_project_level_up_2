@@ -302,6 +302,9 @@
             "ref": "cc1afd81841db36fbef982fe56b48ade6716fac4"
         }
     },
+    "symfony/form": {
+        "version": "v4.1.11"
+    },
     "symfony/framework-bundle": {
         "version": "3.3",
         "recipe": {
@@ -318,6 +321,9 @@
         "version": "v4.0.2"
     },
     "symfony/inflector": {
+        "version": "v4.2.4"
+    },
+    "symfony/intl": {
         "version": "v4.2.4"
     },
     "symfony/lts": {
@@ -361,6 +367,9 @@
     },
     "symfony/polyfill-ctype": {
         "version": "v1.9.0"
+    },
+    "symfony/polyfill-intl-icu": {
+        "version": "v1.11.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.6.0"
