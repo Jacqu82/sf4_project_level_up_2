@@ -2,6 +2,28 @@
 
 {% block body %}
     <div class="container">
+
+        {% macro fizzBuzz(num) %}
+            {% set result = '' %}
+            {% for i in 1..15 %}
+                {% if i is divisible by(3) and i is divisible by(5) %}
+                    {% set result = result ~ 'FizzBuzz' %}
+                {% elseif i is divisible by(5) %}
+                    {% set result = result ~ 'Buzz' %}
+                {% elseif i is divisible by(3) %}
+                    {% set result = result ~ 'Fizz' %}
+                {% else %}
+                    {% set result = result ~ i %}
+                {% endif %}
+            {% endfor %}
+            {{ result }}
+        {% endmacro fizzBuzz %}
+
+        {% import _self as macro %}
+
+{#        <p>{{ macro.fizzBuzz(15) }}</p>#}
+
+
         <div class="row">
 
             <!-- Article List -->
