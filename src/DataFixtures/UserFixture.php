@@ -22,7 +22,12 @@ class UserFixture extends BaseFixture
             $user = new User();
             $user
                 ->setEmail(sprintf('spacebar%d@wp.pl', $i))
-                ->setFirstName($this->faker->firstName)
+                ->setFirstName($this->faker->firstName);
+            if ($this->faker->boolean) {
+                $user->setTwitterUsername($this->faker->userName);
+            }
+            $user
+                ->agreeTerms()
                 ->setPassword($this->passwordEncoder->encodePassword(
                     $user,
                     'qwerty'
@@ -45,6 +50,7 @@ class UserFixture extends BaseFixture
                 $user->setTwitterUsername($this->faker->userName);
             }
             $user
+                ->agreeTerms()
                 ->setPassword($this->passwordEncoder->encodePassword(
                     $user,
                     'qwerty'
