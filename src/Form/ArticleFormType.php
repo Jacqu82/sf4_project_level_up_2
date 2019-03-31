@@ -21,15 +21,19 @@ class ArticleFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $article = $options['data'] ?? null;
+        $isEdit = $article && $article->getId();
+
         $builder
             ->add('title', TextType::class, [
                 'help' => 'Choose something catchy!'
             ])
-            ->add('content')
-            ->add('publishedAt', null, [
-                'widget' => 'single_text'
+            ->add('content', null, [
+                'rows' => 3
             ])
-            ->add('author', UserSelectTextType::class)
+            ->add('author', UserSelectTextType::class, [
+                'disabled' => $isEdit
+            ])
 //            ->add('author', EntityType::class, [
 //                'class' => User::class,
 //                'choice_label' => function (User $user) {
@@ -43,12 +47,20 @@ class ArticleFormType extends AbstractType
 ////                }
 //            ])
         ;
+
+        if ($options['include_publish_at']) {
+            $builder
+                ->add('publishedAt', null, [
+                    'widget' => 'single_text'
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Article::class
+            'data_class' => Article::class,
+            'include_publish_at' => false
         ]);
     }
 }

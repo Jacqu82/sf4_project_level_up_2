@@ -50,7 +50,9 @@ class ArticleAdminController extends AbstractController
 //        if (!$this->isGranted('MANAGE', $article)) {
 //            throw $this->createAccessDeniedException('No access!');
 //        }
-        $form = $this->createForm(ArticleFormType::class, $article);
+        $form = $this->createForm(ArticleFormType::class, $article, [
+            'include_publish_at' => true
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
