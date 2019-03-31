@@ -3,9 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\User;
 use App\Repository\UserRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,18 +28,20 @@ class ArticleFormType extends AbstractType
             ->add('publishedAt', null, [
                 'widget' => 'single_text'
             ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => function (User $user) {
-                    return sprintf('(%d) %s', $user->getId(), $user->getFirstName());
-                },
-                'placeholder' => 'Choose an author',
-                'invalid_message' => 'Symfony is too smart for your hacking!',
-                'choices' => $this->userRepository->findAllFirstNameAlphabetical(),
-//                'query_builder' => function (UserRepository $repo) {
-//                    return $repo->findOrderedByName();
-//                }
-            ]);
+            ->add('author', UserSelectTextType::class)
+//            ->add('author', EntityType::class, [
+//                'class' => User::class,
+//                'choice_label' => function (User $user) {
+//                    return sprintf('(%d) %s', $user->getId(), $user->getFirstName());
+//                },
+//                'placeholder' => 'Choose an author',
+//                'invalid_message' => 'Symfony is too smart for your hacking!',
+//                'choices' => $this->userRepository->findAllFirstNameAlphabetical(),
+////                'query_builder' => function (UserRepository $repo) {
+////                    return $repo->findOrderedByName();
+////                }
+//            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
