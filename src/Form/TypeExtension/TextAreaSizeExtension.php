@@ -35,5 +35,4 @@ class TextAreaSizeExtension implements FormTypeExtensionInterface
     {
         return TextareaType::class;
     }
-
 }
