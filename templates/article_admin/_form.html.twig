@@ -1,4 +1,3 @@
-
 {{ form_start(articleForm, {attr: {novalidate: 'novalidate'}}) }}
 
     {{ form_row(articleForm.title, {label: 'Article Title'}) }}
@@ -6,12 +5,19 @@
     {% if articleForm.publishedAt is defined %}
         {{ form_row(articleForm.publishedAt) }}
     {% endif %}
-    {{ form_row(articleForm.location) }}
-    {% if articleForm.specificLocationName is defined %}
-        {{ form_row(articleForm.specificLocationName) }}
-    {% endif %}
+        {{ form_row(articleForm.location, {
+            attr: {
+                'data-specific-location-url': path('admin_article_location_select'),
+                'class': 'js-article-form-location'
+            }
+        }) }}
+    <div class="js-specific-location-target">
+        {%  if articleForm.specificLocationName is defined %}
+            {{ form_row(articleForm.specificLocationName) }}
+        {% endif %}
+    </div>
     {{ form_row(articleForm.author) }}
 
-<button type="submit" class="btn btn-primary">{{ button }}</button>
+    <button type="submit" class="btn btn-primary">{{ button }}</button>
 
 {{ form_end(articleForm) }}
